@@ -62,6 +62,10 @@
         padding: 2px 4px;
       }
 
+      .px.example {
+        padding: 32px 16px;
+      }
+
       .pxrem.example {
         padding: 32px 16px;
       }
@@ -74,10 +78,6 @@
         padding: 2rem 1rem;
       }
 
-      .px.example {
-        padding: 32px 16px;
-      }
-
       /* --- Card --- */
 
       .card {
@@ -85,6 +85,10 @@
         overflow: hidden;
         border-radius: 5px;
         flex: 1 1 0;
+      }
+
+      .px .card {
+        margin: 0 16px;
       }
 
       .pxrem .card {
@@ -99,14 +103,15 @@
         margin: 0 1rem;
       }
 
-      .px .card {
-        margin: 0 16px;
-      }
-
       /* --- Head --- */
 
       .head {
         background-color: lightgreen;
+      }
+
+      .px .head {
+        padding: 16px;
+        font-size: 24px;
       }
 
       .pxrem .head {
@@ -124,15 +129,15 @@
         font-size: 1.5rem;
       }
 
-      .px .head {
-        padding: 16px;
-        font-size: 24px;
-      }
-
       /* --- Body --- */
 
       .body {
         background-color: cornsilk;
+      }
+
+      .px .body {
+        padding: 16px;
+        font-size: 16px;
       }
 
       .pxrem .body {
@@ -149,11 +154,6 @@
         padding: 1rem;
         font-size: 1rem;
       }
-
-      .px .body {
-        padding: 16px;
-        font-size: 16px;
-      }
     </style>
   </head>
 
@@ -167,6 +167,13 @@
       >
     </div>
 
+    <!-- List the examples here -->
+
+    <div class="px example">
+      <div class="example-title">
+        px for everything (will only change on zoom)
+      </div>
+    </div>
     <div class="pxrem example">
       <div class="example-title">rem for font, px for other</div>
     </div>
@@ -175,11 +182,6 @@
     </div>
     <div class="rem example">
       <div class="example-title">rem for everything</div>
-    </div>
-    <div class="px example">
-      <div class="example-title">
-        px for everything (will only change on zoom)
-      </div>
     </div>
 
     <script>
