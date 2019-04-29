@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>CSS Size Units</title>
     <style>
+      body {
+        font-family: Sans-Serif;
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -30,6 +34,13 @@
         height: 100%;
         font-size: 20px;
         margin: 4px;
+      }
+
+      .change-help {
+        height: 100%;
+        font-size: 20px;
+        margin: 4px;
+        color: gray;
       }
 
       /* --- Example elements --- */
@@ -62,6 +73,10 @@
         padding: 2rem 1rem;
       }
 
+      .px.example {
+        padding: 32px 16px;
+      }
+
       /* --- Card --- */
 
       .card {
@@ -83,6 +98,10 @@
         margin: 0 1rem;
       }
 
+      .px .card {
+        margin: 0 16px;
+      }
+
       /* --- Head --- */
 
       .head {
@@ -91,17 +110,22 @@
 
       .pxrem .head {
         padding: 16px;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
       }
 
       .em .head {
         padding: 1em;
-        font-size: 1.3em;
+        font-size: 1.5em;
       }
 
       .rem .head {
         padding: 1rem;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
+      }
+
+      .px .head {
+        padding: 16px;
+        font-size: 24px;
       }
 
       /* --- Body --- */
@@ -112,14 +136,22 @@
 
       .pxrem .body {
         padding: 16px;
+        font-size: 1rem;
       }
 
       .em .body {
         padding: 1em;
+        font-size: 1em;
       }
 
       .rem .body {
         padding: 1rem;
+        font-size: 1rem;
+      }
+
+      .px .body {
+        padding: 16px;
+        font-size: 16px;
       }
     </style>
   </head>
@@ -129,16 +161,24 @@
       <button class="change-button" id="down"><</button>
       <button class="change-button" id="up">></button>
       <span class="change-font" id="size"></span>
+      <span class="change-help"
+        >- Adjust base font size here, and try zooming your browser too</span
+      >
     </div>
 
     <div class="pxrem example">
       <div class="example-title">rem for font, px for other</div>
     </div>
     <div class="em example">
-      <div class="example-title">em for everything</div>
+      <div class="example-title">em for everything (notice head padding)</div>
     </div>
     <div class="rem example">
       <div class="example-title">rem for everything</div>
+    </div>
+    <div class="px example">
+      <div class="example-title">
+        px for everything (will only change on zoom)
+      </div>
     </div>
 
     <script>
