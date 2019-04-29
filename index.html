@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Demo</title>
+    <style>
+      html {
+        font-size: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      /* --- Settings --- */
+
+      .settings {
+        border: 1px solid lightcoral;
+        margin: 8px 0;
+        display: flex;
+        padding: 4px;
+      }
+
+      /* --- Change elements --- */
+
+      .change-button {
+        margin: 4px;
+        font-size: 20px;
+      }
+
+      .change-font {
+        height: 100%;
+        font-size: 20px;
+        margin: 4px;
+      }
+
+      /* --- Example elements --- */
+
+      .example {
+        border: 1px solid lightblue;
+        margin: 8px 0;
+        display: flex;
+        position: relative;
+      }
+
+      .example-title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 16px;
+        color: gray;
+        padding: 2px 4px;
+      }
+
+      .pxrem.example {
+        padding: 32px 16px;
+      }
+
+      .em.example {
+        padding: 2em 1em;
+      }
+
+      .rem.example {
+        padding: 2rem 1rem;
+      }
+
+      /* --- Card --- */
+
+      .card {
+        border: 1px solid lightgray;
+        overflow: hidden;
+        border-radius: 5px;
+        flex: 1 1 0;
+      }
+
+      .pxrem .card {
+        margin: 0 16px;
+      }
+
+      .em .card {
+        margin: 0 1em;
+      }
+
+      .rem .card {
+        margin: 0 1rem;
+      }
+
+      /* --- Head --- */
+
+      .head {
+        background-color: lightgreen;
+      }
+
+      .pxrem .head {
+        padding: 16px;
+        font-size: 1.3rem;
+      }
+
+      .em .head {
+        padding: 1em;
+        font-size: 1.3em;
+      }
+
+      .rem .head {
+        padding: 1rem;
+        font-size: 1.3rem;
+      }
+
+      /* --- Body --- */
+
+      .body {
+        background-color: cornsilk;
+      }
+
+      .pxrem .body {
+        padding: 16px;
+      }
+
+      .em .body {
+        padding: 1em;
+      }
+
+      .rem .body {
+        padding: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="settings">
+      <button class="change-button" id="down"><</button>
+      <button class="change-button" id="up">></button>
+      <span class="change-font" id="size"></span>
+    </div>
+
+    <div class="pxrem example">
+      <div class="example-title">rem for font, px for other</div>
+    </div>
+    <div class="em example">
+      <div class="example-title">em for everything</div>
+    </div>
+    <div class="rem example">
+      <div class="example-title">rem for everything</div>
+    </div>
+
+    <script>
+      /* --- Constants --- */
+
+      var BASE = 16;
+      var MINIMUM = 4;
+      var MAXIMUM = 72;
+      var INCREMENT = 4;
+      var NUM_HORIZONTAL_CARDS = 2;
+
+      /* --- Elements --- */
+
+      var htmlElement = document.documentElement;
+      var downButton = document.getElementById('down');
+      var upButton = document.getElementById('up');
+      var size = document.getElementById('size');
+
+      /* --- Set base font size --- */
+
+      htmlElement.style.fontSize = BASE + 'px';
+
+      /**
+       * Update the font size display next to up and down buttons.
+       */
+      function updateFontSizeDisplay() {
+        size.innerText = htmlElement.style.fontSize;
+      }
+      updateFontSizeDisplay();
+
+      /**
+       * Transforms the string px (eg: "16px") to the number of px (eg: 16).
+       * @param {string} stringPixels
+       */
+      function getNumberOfPixels(stringPixels) {
+        if (!stringPixels) return 0;
+        const numberString = stringPixels.slice(0, stringPixels.length - 2);
+        return Number(numberString);
+      }
+
+      /**
+       * Decrease the base font size until minimum.
+       */
+      function onDown() {
+        var currentFontSize = getNumberOfPixels(htmlElement.style.fontSize);
+        if (currentFontSize <= MINIMUM + INCREMENT) {
+          htmlElement.style.fontSize = MINIMUM + 'px';
+        } else {
+          htmlElement.style.fontSize = currentFontSize - INCREMENT + 'px';
+        }
+        updateFontSizeDisplay();
+      }
+
+      /**
+       * Increase the base font size until maximum.
+       */
+      function onUp() {
+        var currentFontSize = getNumberOfPixels(htmlElement.style.fontSize);
+        if (currentFontSize >= MAXIMUM - INCREMENT) {
+          htmlElement.style.fontSize = MAXIMUM + 'px';
+        } else {
+          htmlElement.style.fontSize = currentFontSize + INCREMENT + 'px';
+        }
+        updateFontSizeDisplay();
+      }
+
+      /**
+       * Mount the common content into the examples.
+       */
+      function mountContent() {
+        const examples = document.getElementsByClassName('example');
+        var content =
+          '<div class="head">Some Head</div>' +
+          '<div class="body">' +
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse' +
+          'consequatur recusandae cum maxime magnam quasi distinctio veniam ab' +
+          'animi debitis inventore aut facere eligendi cupiditate, quibusdam' +
+          'magni et possimus est.' +
+          '</div>';
+        for (var i = 0; i < examples.length; i++) {
+          for (var j = 0; j < NUM_HORIZONTAL_CARDS; j++) {
+            var card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = content;
+            examples[i].appendChild(card);
+          }
+        }
+      }
+      mountContent();
+
+      /* --- Add listeners for font size change buttons --- */
+
+      downButton.addEventListener('click', onDown);
+      upButton.addEventListener('click', onUp);
+    </script>
+  </body>
+</html>
